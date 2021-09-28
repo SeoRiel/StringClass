@@ -2,12 +2,16 @@
 
 String::String()
 {
+	mString = "";
+	mLength = 0;
+	mElement = nullptr;
 }
 
 String::String(const char* str)
 	: mString{ str }
 {
-
+	mLength = 0;
+	mElement = nullptr;
 }
 
 String::String(const String& str)
@@ -19,7 +23,9 @@ String::String(const String& str)
 
 String::~String()
 {
-	delete[] mString;
+	mLength = 0;
+	mString = "";
+	mElement = nullptr;
 }
 
 const char* String::GetString()
@@ -52,17 +58,27 @@ void String::Print()
 
 String String::operator+(const String& string)
 {
-
-	return String();
+	return string;
 }
 
 String String::operator=(const String& string)
 {
-	return String();
+	int index{ 0 };
+
+	while (mString[index] != '\0')
+	{
+		index++;
+	}
+
+	strcat(mString, )
+	mString = string.mString;
+
+	return mString;
 }
 
 String String::operator+=(const String& string)
 {
+
 	return String();
 }
 

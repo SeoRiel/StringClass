@@ -4,12 +4,10 @@
 int main()
 {
 	String s1("test");
-	
+	String s2("String");
+	String s3;
+
+	s1 + s2;
+
 	s1.Print();
-	s1.SetLength(10);
-
-	std::cout << s1.GetLength() << std::endl;
-	// std::cout << s1.GetLength() << std::endl;
-
-	// std::cout << s1 << std::endl;
 }

@@ -28,4 +28,3 @@ public:
 	int operator[] (int index);
 	friend std::ostream& operator <<(std::ostream& os, const String string);
 };
-
