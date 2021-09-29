@@ -4,28 +4,30 @@ String::String()
 {
 	mString = "";
 	mLength = 0;
-	mElement = nullptr;
+}
+
+String::String(int index)
+{
+	mString = new char[index];
+	mLength = 0;
 }
 
 String::String(const char* str)
 	: mString{ str }
 {
 	mLength = 0;
-	mElement = nullptr;
 }
 
 String::String(const String& str)
 {
-	mElement = new String();
-	mElement->mString = str.mString;
-	mElement->mLength = str.mLength;
+	mString = str.mString;
+	mLength = str.mLength;
 }
 
 String::~String()
 {
 	mLength = 0;
 	mString = "";
-	mElement = nullptr;
 }
 
 const char* String::GetString()
@@ -41,45 +43,74 @@ void String::SetString(const char* set)
 
 int String::GetLength()
 {
+	int index{ 0 };
+
+	for (int i = 0; mString[i] != '\0'; i++)
+	{
+		index++;
+	}
+
+	mLength = index;
+
 	return mLength;
 }
 
 int String::SetLength(int set)
 {
 	mLength = set;
+	mString[set];
 
 	return mLength;
 }
 
-void String::Print()
+// 모르겠는 것 1
+String String::operator+(const String& set)
 {
-	std::cout << mString << std::endl;
-}
+	int index{}, setSize{}, total{};
 
-String String::operator+(const String& string)
-{
-	return string;
-}
-
-String String::operator=(const String& string)
-{
-	int index{ 0 };
-
-	while (mString[index] != '\0')
+	for (int i = 0; mString[i] != ' '; i++)
 	{
 		index++;
 	}
 
-	strcat(mString, )
+	for (int j = 0; set.mString[j] != ' '; j++)
+	{
+		setSize++;
+	}
+
+	total = index + setSize;
+	char* temp{ new char[total] };
+
+	for (int input = 0; input <= index + setSize; input++)
+	{
+		if (input < index)
+		{
+			temp[input] = mString[input];
+		}
+		else
+		{
+			temp[input] = set.mString[input];
+		}
+	}
+
+	mString = temp;
+	delete[] temp;
+
+	return mString;
+}
+
+String String::operator=(String& string)
+{
 	mString = string.mString;
 
 	return mString;
 }
 
+// 모르겠는 것 2
 String String::operator+=(const String& string)
 {
 
-	return String();
+	return mString;
 }
 
 int String::operator[](int index)
@@ -89,7 +120,7 @@ int String::operator[](int index)
 
 std::ostream& operator<<(std::ostream& os, const String string)
 {
-	// TODO: insert return statement here
+	os << string.mString;
 
 	return os;
 }
