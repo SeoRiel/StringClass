@@ -9,7 +9,6 @@ int main()
 
 	// 2. 지정한 길이만큼 생성
 	String s2(10);
-	std::cout << "2. 지정한 길이만큼 생성      : " << s2 << std::endl;
 
 	String s3("case");
 
@@ -23,7 +22,8 @@ int main()
 	std::cout << "-----------------------------------------" << std::endl;
 
 	 // 1. 두 문자열을 이어 붙여서 새로운 문자열 생성
-	 //std::cout << s1 + s3 << std::endl;
+	String s5(s1 + s3);
+	std::cout << "1. 두 문자열을 이어 붙여서 새로운 문자열 생성	          : " << s1 + s3 << std::endl;
 
 	// 2. str2 문자열 값을 str1에 배정
 	s1 = s3;

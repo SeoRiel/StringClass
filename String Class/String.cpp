@@ -2,6 +2,7 @@
 
 String::String()
 {
+	// mString = new char[mLength];
 	mString = "";
 	mLength = 0;
 }
@@ -12,22 +13,24 @@ String::String(int index)
 	mLength = 0;
 }
 
-String::String(const char* str)
-	: mString{ str }
+String::String(const char* set)
+	: mString{ set }
 {
+	// mString = new char[mLength];
 	mLength = 0;
 }
 
-String::String(const String& str)
+String::String(const String& set)
 {
-	mString = str.mString;
-	mLength = str.mLength;
+	mString = set.mString;
+	mLength = set.mLength;
 }
 
 String::~String()
 {
-	mLength = 0;
+	// delete[] mString;
 	mString = "";
+	mLength = 0;
 }
 
 const char* String::GetString()
@@ -39,7 +42,6 @@ void String::SetString(const char* set)
 {
 	mString = set;
 }
-
 
 int String::GetLength()
 {
@@ -66,37 +68,34 @@ int String::SetLength(int set)
 // 모르겠는 것 1
 String String::operator+(const String& set)
 {
-	int index{}, setSize{}, total{};
+	int total{ 0 }, index1{ 0 }, index2{ 0 };
 
-	for (int i = 0; mString[i] != ' '; i++)
+	for (int i = 0; mString[i] != '\0'; i++)
 	{
-		index++;
+		index1++;
 	}
 
-	for (int j = 0; set.mString[j] != ' '; j++)
+	for (int j = 0; set.mString[j] != '\0'; j++)
 	{
-		setSize++;
+		index2++;
 	}
+	total = index1 + index2 + 1;
 
-	total = index + setSize;
-	char* temp{ new char[total] };
+	char* newString = new char[total];
 
-	for (int input = 0; input <= index + setSize; input++)
+	for (int k = 0; k < total; k++)
 	{
-		if (input < index)
+		if (k <= index1)
 		{
-			temp[input] = mString[input];
+			newString[k] = mString[k];
 		}
-		else
+		else if( k > index1 && k < total)
 		{
-			temp[input] = set.mString[input];
+			newString[k] = set.mString[k - index1];
 		}
 	}
 
-	mString = temp;
-	delete[] temp;
-
-	return mString;
+	return newString;
 }
 
 String String::operator=(String& string)
@@ -109,7 +108,6 @@ String String::operator=(String& string)
 // 모르겠는 것 2
 String String::operator+=(const String& string)
 {
-
 	return mString;
 }
 
