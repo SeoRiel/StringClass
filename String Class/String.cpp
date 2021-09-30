@@ -65,58 +65,94 @@ int String::SetLength(int set)
 	return mLength;
 }
 
-// 모르겠는 것 1
-String String::operator+(const String& set)
+String String::operator+ (String& set)
 {
 	int total{ 0 }, index1{ 0 }, index2{ 0 };
 
 	for (int i = 0; mString[i] != '\0'; i++)
 	{
-		index1++;
+		index1 = i;
 	}
 
 	for (int j = 0; set.mString[j] != '\0'; j++)
 	{
-		index2++;
+		index2 = j;
 	}
-	total = index1 + index2 + 1;
+
+	total = index1 + index2 + 2;
 
 	char* newString = new char[total];
 
-	for (int k = 0; k < total; k++)
+	for (int k = 0; k <= total; k++)
 	{
 		if (k <= index1)
 		{
 			newString[k] = mString[k];
 		}
-		else if( k > index1 && k < total)
+		else if( k > index1 && k <= total)
 		{
-			newString[k] = set.mString[k - index1];
+			newString[k] = set.mString[k - index1 - 1];
 		}
 	}
 
 	return newString;
 }
 
-String String::operator=(String& string)
+String String::operator+= (const String& set)
+{
+	int total{ 0 }, index1{ 0 }, index2{ 0 };
+
+	for (int i = 0; mString[i] != '\0'; i++)
+	{
+		index1 = i;
+	}
+
+	for (int j = 0; set.mString[j] != '\0'; j++)
+	{
+		index2 = j;
+	}
+
+	total = index1 + index2 + 2;
+
+	char* newString = new char[total];
+
+	for (int k = 0; k <= total; k++)
+	{
+		if (k <= index1)
+		{
+			newString[k] = mString[k];
+		}
+		else if (k > index1 && k <= total)
+		{
+			newString[k] = set.mString[k - index1 - 1];
+		}
+	}
+	mString = newString;
+
+	return mString;
+}
+
+String String::operator= (String& string)
 {
 	mString = string.mString;
 
 	return mString;
 }
 
-// 모르겠는 것 2
-String String::operator+=(const String& string)
+String String::operator= (char* set)
 {
+	mString = set;
 	return mString;
 }
 
-int String::operator[](int index)
+
+int String::operator[] (int index)
 {
+	// char character = mString[index];
 	return mString[index];
 }
 
-std::ostream& operator<<(std::ostream& os, const String string)
+std::ostream& operator<< (std::ostream& os, const String string)
 {
 	os << string.mString;
 

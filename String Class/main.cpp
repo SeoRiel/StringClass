@@ -30,7 +30,8 @@ int main()
 	std::cout << "2. str2 문자열 값을 str1에 배정				  : " << s1 << std::endl;
 
 	// 3. str1에 str1 + str2 문자열을 배정
-	// s1 += s3;
+	s1 += s3;
+	std::cout << "3. str1에 str1 + str2 문자열을 배정			  : " << s1 << std::endl;
 
 	// 4. 배열 첨자 []를 통해 해당 문자 변경하기
 	//String s5("hello");

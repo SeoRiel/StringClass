@@ -22,9 +22,10 @@ public:
 	int GetLength();
 	int SetLength(int set);
 
-	String operator+ (const String& set);
-	String operator= (String& set);
+	String operator+ (String& set);
 	String operator+= (const String& set);
+	String operator= (String& set);
+	String operator= (char* set);
 	int operator[] (int index);
 	friend std::ostream& operator <<(std::ostream& os, const String set);
 };
