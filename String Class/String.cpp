@@ -2,35 +2,62 @@
 
 String::String()
 {
-	// mString = new char[mLength];
-	mString = "";
 	mLength = 0;
+	mString = new char[mLength];
 }
 
 String::String(int index)
 {
-	mString = new char[index];
-	mLength = 0;
+	mLength = index;
+	mString = new char[mLength];
+
+	for (int i = 0; i < mLength; i++)
+	{
+		mString[i] = ' ';
+	}
+	mString[mLength] = '\0';
+}
+
+String::String(char* set)
+{
+	mLength = sizeof(set);
+	mString = new char[mLength];
+
+	for (int i = 0; i < mLength; i++)
+	{
+		if (set[i] != '\0')
+		{
+			break;
+		}
+		mString[i] = *set;
+	}
 }
 
 String::String(const char* set)
-	: mString{ set }
 {
-	// mString = new char[mLength];
-	mLength = 0;
+	mLength = sizeof(set);
+	mString = new char[mLength];
+
+	for (int i = 0; i < mLength; i++)
+	{
+		mString[i] = set[i];
+	}
 }
 
 String::String(const String& set)
 {
-	mString = set.mString;
 	mLength = set.mLength;
+	mString = new char[mLength];
+	for (int i = 0; i < mLength; i++)
+	{
+		mString[i] = set.mString[i];
+	}
 }
 
 String::~String()
 {
-	// delete[] mString;
-	mString = "";
 	mLength = 0;
+	delete[] mString;
 }
 
 const char* String::GetString()
@@ -38,9 +65,9 @@ const char* String::GetString()
 	return mString;
 }
 
-void String::SetString(const char* set)
+void String::SetString(char* set)
 {
-	mString = set;
+	*mString = *set;
 }
 
 int String::GetLength()
@@ -68,6 +95,8 @@ int String::SetLength(int set)
 String String::operator+ (String& set)
 {
 	int total{ 0 }, index1{ 0 }, index2{ 0 };
+	const char* newString;
+	// String temp;
 
 	for (int i = 0; mString[i] != '\0'; i++)
 	{
@@ -81,19 +110,21 @@ String String::operator+ (String& set)
 
 	total = index1 + index2 + 2;
 
-	char* newString = new char[total];
+	char* tempString = new char[total];
 
 	for (int k = 0; k <= total; k++)
 	{
 		if (k <= index1)
 		{
-			newString[k] = mString[k];
+			tempString[k] = mString[k];
 		}
 		else if( k > index1 && k <= total)
 		{
-			newString[k] = set.mString[k - index1 - 1];
+			tempString[k] = set.mString[k - index1 - 1];
 		}
 	}
+	newString = tempString;
+	delete[] tempString;
 
 	return newString;
 }
@@ -101,6 +132,7 @@ String String::operator+ (String& set)
 String String::operator+= (const String& set)
 {
 	int total{ 0 }, index1{ 0 }, index2{ 0 };
+	// String temp;
 
 	for (int i = 0; mString[i] != '\0'; i++)
 	{
@@ -128,13 +160,14 @@ String String::operator+= (const String& set)
 		}
 	}
 	mString = newString;
+	delete[] newString;
 
 	return mString;
 }
 
 String String::operator= (String& string)
 {
-	mString = string.mString;
+	*mString = *string.mString;
 
 	return mString;
 }
@@ -146,9 +179,8 @@ String String::operator= (char* set)
 }
 
 
-int String::operator[] (int index)
+char& String::operator[] (int index)
 {
-	// char character = mString[index];
 	return mString[index];
 }
 
